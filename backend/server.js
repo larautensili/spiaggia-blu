@@ -58,7 +58,9 @@ function defaultSettings() {
     paymentStripe: true,
     satispayQrUrl: null,
     satispayNote: 'Scansiona il QR Satispay e indica l\'ID prenotazione nel messaggio.',
-    beachMapUrl: null
+    beachMapUrl: null,
+    refundNoticeEnabled: true,
+    refundNoticeText: 'Per cancellazioni prenotazioni con pagamento Carta di credito e Satispay il rimborso sarà riaccreditato con una penale di € {penale}.'
   };
 }
 
@@ -98,6 +100,10 @@ function loadDB() {
       if (!d.seasons) d.seasons = defaultSeasons();
       if (!d.settings) d.settings = defaultSettings();
       if (d.settings && d.settings.beachMapUrl === undefined) d.settings.beachMapUrl = null;
+      if (d.settings && d.settings.refundNoticeEnabled === undefined) d.settings.refundNoticeEnabled = true;
+      if (d.settings && !d.settings.refundNoticeText) {
+        d.settings.refundNoticeText = 'Per cancellazioni prenotazioni con pagamento Carta di credito e Satispay il rimborso sarà riaccreditato con una penale di € {penale}.';
+      }
       if (!d.rows) {
         d.rows = defaultRows();
       } else {
@@ -455,7 +461,9 @@ async function handleAPI(req, res, pathname, query) {
       satispayQrUrl: s.satispayQrUrl,
       satispayNote: s.satispayNote,
       cancellationPenalty: s.cancellationPenalty,
-      beachMapUrl: s.beachMapUrl || null
+      beachMapUrl: s.beachMapUrl || null,
+      refundNoticeEnabled: s.refundNoticeEnabled !== false,
+      refundNoticeText: s.refundNoticeText || ''
     });
   }
 
@@ -474,6 +482,8 @@ async function handleAPI(req, res, pathname, query) {
     if (body.paymentSatispay !== undefined) s.paymentSatispay = !!body.paymentSatispay;
     if (body.paymentStripe !== undefined) s.paymentStripe = !!body.paymentStripe;
     if (body.satispayNote !== undefined) s.satispayNote = String(body.satispayNote);
+    if (body.refundNoticeEnabled !== undefined) s.refundNoticeEnabled = !!body.refundNoticeEnabled;
+    if (body.refundNoticeText !== undefined) s.refundNoticeText = String(body.refundNoticeText);
     db.settings = s;
     saveDB();
     return send(res, 200, { ok: true, settings: s });

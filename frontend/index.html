@@ -196,6 +196,9 @@
                 <span class="payment-card">💵 Contanti all'arrivo</span>
               </label>
             </div>
+            <div id="refund-notice" class="refund-notice" style="display:none">
+              <p id="refund-notice-text"></p>
+            </div>
           </div>
 
           <div class="card summary-card">
@@ -214,6 +217,12 @@
               <span class="legend-item"><i class="dot selected"></i> Selezionato</span>
               <span class="legend-item"><i class="dot pending"></i> In prenotazione</span>
               <span class="legend-item"><i class="dot occupied"></i> Occupato</span>
+            </div>
+          </div>
+          <div id="public-planimetry" class="public-planimetry" style="display:none">
+            <div class="public-planimetry-inner">
+              <img id="public-planimetry-img" src="" alt="Planimetria spiaggia">
+              <button type="button" class="btn btn-outline btn-sm" id="btn-public-planimetry">🔍 Vedi planimetria ingrandita</button>
             </div>
           </div>
           <div class="beach-map" id="beach-map"></div>
@@ -307,6 +316,13 @@
           <div class="form-group">
             <label for="cfg-penalty">Importo penale (€)</label>
             <input type="number" id="cfg-penalty" min="0" step="0.5" value="15">
+          </div>
+          <div class="form-group">
+            <label><input type="checkbox" id="cfg-refund-notice-enabled" checked> Mostra avviso rimborso sotto i metodi di pagamento</label>
+          </div>
+          <div class="form-group">
+            <label for="cfg-refund-notice-text">Testo avviso (usa {penale} per inserire l'importo)</label>
+            <textarea id="cfg-refund-notice-text" rows="3" style="width:100%;padding:0.6rem 0.75rem;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.9rem;resize:vertical" placeholder="Per cancellazioni..."></textarea>
           </div>
         </div>
         <div class="card">
@@ -445,7 +461,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>© 2026 <span id="footer-beach-name">Spiaggia Blu</span> – Multi-stagione · Auth · Stripe · Satispay</p>
+      <p>Copyright © 2027 | <span id="footer-beach-name">Bagni Beatrice</span> | All Right Reserved. Web Agency – LARA Sas.</p>
     </div>
   </footer>
 

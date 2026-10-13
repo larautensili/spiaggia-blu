@@ -186,7 +186,23 @@ function applySettingsUI() {
     if (first) first.checked = true;
   }
 
-  // Aggiorna preview planimetria se presente nel DOM
+  // Avviso rimborso sotto metodi di pagamento
+  const refundBox = document.getElementById('refund-notice');
+  const refundText = document.getElementById('refund-notice-text');
+  if (refundBox && refundText) {
+    if (s.refundNoticeEnabled !== false && s.refundNoticeText) {
+      const penale = Number(s.cancellationPenalty ?? 0).toFixed(2);
+      refundText.textContent = String(s.refundNoticeText).replace(/\{penale\}/gi, penale);
+      refundBox.style.display = '';
+    } else {
+      refundBox.style.display = 'none';
+    }
+  }
+
+  // Planimetria sulla mappa pubblica (frontend)
+  updatePublicPlanimetry();
+
+  // Aggiorna preview planimetria admin se presente nel DOM
   if (typeof updateBeachMapPreview === 'function') updateBeachMapPreview();
 }
 
@@ -723,6 +739,10 @@ function fillSettingsForm() {
   document.getElementById('cfg-banner-bg').value = s.bannerBg || '#0a7ea4';
   document.getElementById('cfg-banner-color').value = s.bannerColor || '#ffffff';
   document.getElementById('cfg-penalty').value = s.cancellationPenalty ?? 15;
+  const rnEn = document.getElementById('cfg-refund-notice-enabled');
+  const rnTx = document.getElementById('cfg-refund-notice-text');
+  if (rnEn) rnEn.checked = s.refundNoticeEnabled !== false;
+  if (rnTx) rnTx.value = s.refundNoticeText || 'Per cancellazioni prenotazioni con pagamento Carta di credito e Satispay il rimborso sarà riaccreditato con una penale di € {penale}.';
   document.getElementById('cfg-pay-stripe').checked = s.paymentStripe !== false;
   document.getElementById('cfg-pay-satispay').checked = !!s.paymentSatispay;
   document.getElementById('cfg-pay-cash').checked = !!s.paymentCash;
@@ -746,6 +766,8 @@ async function saveSettings() {
         bannerBg: document.getElementById('cfg-banner-bg').value,
         bannerColor: document.getElementById('cfg-banner-color').value,
         cancellationPenalty: parseFloat(document.getElementById('cfg-penalty').value) || 0,
+        refundNoticeEnabled: document.getElementById('cfg-refund-notice-enabled')?.checked !== false,
+        refundNoticeText: document.getElementById('cfg-refund-notice-text')?.value || '',
         paymentStripe: document.getElementById('cfg-pay-stripe').checked,
         paymentSatispay: document.getElementById('cfg-pay-satispay').checked,
         paymentCash: document.getElementById('cfg-pay-cash').checked,
@@ -780,7 +802,22 @@ async function uploadSatispayQr() {
 }
 
 // ---- Planimetria spiaggia ----
+function updatePublicPlanimetry() {
+  const wrap = document.getElementById('public-planimetry');
+  const img = document.getElementById('public-planimetry-img');
+  const url = state.settings?.beachMapUrl;
+  if (!wrap || !img) return;
+  if (url) {
+    img.src = url;
+    wrap.style.display = '';
+  } else {
+    wrap.style.display = 'none';
+    img.removeAttribute('src');
+  }
+}
+
 function updateBeachMapPreview() {
+
   const url = state.settings?.beachMapUrl;
   const preview = document.getElementById('beach-map-preview');
   const empty = document.getElementById('beach-map-empty');
@@ -1261,6 +1298,11 @@ async function init() {
   document.getElementById('promo-close').addEventListener('click', () => {
     document.getElementById('promo-banner').style.display = 'none';
   });
+
+  const btnPubPlan = document.getElementById('btn-public-planimetry');
+  if (btnPubPlan) btnPubPlan.addEventListener('click', showBeachMapModal);
+  const pubPlanImg = document.getElementById('public-planimetry-img');
+  if (pubPlanImg) pubPlanImg.addEventListener('click', showBeachMapModal);
 }
 
 document.addEventListener('DOMContentLoaded', init);

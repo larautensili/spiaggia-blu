@@ -1,0 +1,82 @@
+SPIAGGIA BLU v2 – Guida completa
+================================
+
+CONTENUTO DEL PACCHETTO
+  AVVIA.bat              -> avvio rapido su Windows (richiede Node.js)
+  BUILD-EXE.bat          -> genera SpiaggiaBlu.exe su Windows
+  backend/               -> server Node.js + database JSON
+  frontend/              -> interfaccia web
+  LEGGIMI.txt            -> questa guida
+
+----------------------------------------
+AVVIO IMMEDIATO (consigliato)
+----------------------------------------
+  1. Installa Node.js 18+ da https://nodejs.org
+     (versione LTS, spunta "Add to PATH")
+  2. Estrai TUTTA questa cartella
+  3. Doppio clic su AVVIA.bat
+  4. Si apre il browser su http://localhost:3000
+
+  Oppure da terminale:
+    cd backend
+    node server.js
+
+----------------------------------------
+ESEGUIBILE .EXE (Windows)
+----------------------------------------
+  SpiaggiaBlu.exe e' gia' incluso nel pacchetto (36 MB).
+
+  Per usarlo:
+  1. Estrai TUTTA la cartella (exe + backend + frontend insieme)
+  2. Doppio clic su SpiaggiaBlu.exe
+  3. Si apre http://localhost:3000 nel browser
+
+  Struttura obbligatoria:
+    MiaCartella/
+      SpiaggiaBlu.exe
+      backend/     (server.js, mail.js, entry.js, db/, ...)
+      frontend/    (index.html, css/, js/, ...)
+
+  Per ricostruire l'.exe su un PC Windows:
+  1. Installa Node.js 18+
+  2. Doppio clic su BUILD-EXE.bat
+  3. Attendi alcuni minuti
+
+----------------------------------------
+CREDENZIALI DEMO
+----------------------------------------
+  Admin:  admin@spiaggiablu.it  / Admin123!
+  Utente: mario@email.com       / User123!
+
+----------------------------------------
+FUNZIONALITA v2
+----------------------------------------
+  - File dinamiche (nome + N ombrelloni) dall'admin
+  - Numerazione ombrelloni personalizzabile per file (es. da 5 a 16)
+  - Planimetria: upload foto disposizione reale + visualizzazione ingrandita (admin)
+  - Mappa: verde=libero, giallo=in prenotazione, rosso=occupato
+  - Hover: date di occupazione del posto
+  - Telefono obbligatorio in registrazione
+  - Sconti progressivi giornaliera (>=7 / >=15 / >=30 giorni)
+  - Nome spiaggia e banner promo configurabili
+  - Pagamenti: Carta (Stripe), Satispay (QR), Contanti all'arrivo
+  - Upload QR Satispay dall'admin
+  - Penale cancellazione configurabile (euro) per Stripe/Satispay
+  - Verifica Satispay / conferma contanti / copia link
+  - Export CSV prenotazioni
+
+----------------------------------------
+CONFIGURAZIONE
+----------------------------------------
+  backend\.env
+    PORT, Stripe keys, SMTP Gmail, ADMIN_NOTIFY_EMAIL
+
+  Admin -> Impostazioni (interfaccia web)
+    Nome spiaggia, banner, penale, metodi pagamento, QR Satispay
+
+----------------------------------------
+PROBLEMI
+----------------------------------------
+  - Porta 3000 occupata -> cambia PORT= in backend\.env
+  - "node non riconosciuto" -> reinstalla Node e riavvia il PC
+  - Antivirus blocca .exe -> aggiungi eccezione

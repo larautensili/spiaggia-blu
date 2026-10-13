@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spiaggia Blu – Prenotazioni Multi-Stagione</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Promo banner -->
+  <div id="promo-banner" class="promo-banner" style="display:none">
+    <div class="container promo-banner-inner">
+      <span id="promo-banner-text"></span>
+      <button type="button" class="promo-close" id="promo-close" aria-label="Chiudi">&times;</button>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">🏖️</span>
+        <div>
+          <h1 id="beach-name">Spiaggia Blu</h1>
+          <p class="tagline">Prenotazioni multi-stagione</p>
+        </div>
+      </div>
+      <nav class="nav" id="main-nav">
+        <button class="nav-btn active" data-view="prenota">Prenota</button>
+        <button class="nav-btn" data-view="calendario">Calendario</button>
+        <button class="nav-btn" data-view="mie-prenotazioni" id="nav-mie" style="display:none">Le mie prenotazioni</button>
+        <button class="nav-btn" data-view="admin" id="nav-admin" style="display:none">Admin</button>
+      </nav>
+      <div class="auth-area" id="auth-area">
+        <button class="btn btn-sm btn-outline" id="btn-show-login">Accedi</button>
+        <button class="btn btn-sm btn-primary" id="btn-show-register">Registrati</button>
+      </div>
+      <div class="user-area" id="user-area" style="display:none">
+        <span class="user-name" id="user-name"></span>
+        <button class="btn btn-sm btn-outline" id="btn-logout">Esci</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" class="modal" style="display:none">
+      <div class="modal-backdrop" id="auth-backdrop"></div>
+      <div class="modal-box">
+        <button class="modal-close" id="auth-close">&times;</button>
+        <div id="login-form-wrap">
+          <h2>Accedi</h2>
+          <p class="muted">Entra per prenotare e gestire le tue prenotazioni.</p>
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="mario@email.com">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="••••••••">
+          </div>
+          <button class="btn btn-primary" id="btn-login">Accedi</button>
+          <p class="auth-switch">Non hai un account? <a href="#" id="switch-to-register">Registrati</a></p>
+          <div class="demo-creds">
+            <small>Demo user: <code>mario@email.com</code> / <code>User123!</code></small><br>
+            <small>Admin: <code>admin@spiaggiablu.it</code> / <code>Admin123!</code></small>
+          </div>
+        </div>
+        <div id="register-form-wrap" style="display:none">
+          <h2>Registrati</h2>
+          <p class="muted">Crea un account per prenotare i posti in spiaggia.</p>
+          <div class="form-group">
+            <label for="reg-nome">Nome e Cognome *</label>
+            <input type="text" id="reg-nome" placeholder="Mario Rossi" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email *</label>
+            <input type="email" id="reg-email" placeholder="mario@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-telefono">Telefono *</label>
+            <input type="tel" id="reg-telefono" placeholder="+39 333 1234567" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Password (min. 6 caratteri) *</label>
+            <input type="password" id="reg-password" placeholder="••••••••" required>
+          </div>
+          <button class="btn btn-primary" id="btn-register">Crea account</button>
+          <p class="auth-switch">Hai già un account? <a href="#" id="switch-to-login">Accedi</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SATISPAY PAYMENT MODAL -->
+    <div id="satispay-modal" class="modal" style="display:none">
+      <div class="modal-backdrop" id="satispay-backdrop"></div>
+      <div class="modal-box" style="max-width:420px">
+        <button class="modal-close" id="satispay-close">&times;</button>
+        <h2>💳 Paga con Satispay</h2>
+        <p class="muted" id="satispay-booking-info"></p>
+        <div id="satispay-qr-wrap" class="satispay-qr-wrap">
+          <img id="satispay-qr-img" src="" alt="QR Satispay" style="display:none;max-width:220px;margin:1rem auto;display:block">
+          <p id="satispay-no-qr" class="muted" style="display:none">QR non ancora configurato dall'amministratore.</p>
+        </div>
+        <p id="satispay-note" class="muted" style="font-size:0.85rem;margin:0.75rem 0"></p>
+        <p style="font-size:0.85rem"><strong>ID prenotazione:</strong> <code id="satispay-booking-id"></code></p>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1rem">
+          <button class="btn btn-outline btn-sm" id="btn-copy-satispay-link">📋 Copia link</button>
+          <button class="btn btn-primary btn-sm" id="btn-satispay-done">Ho pagato / Chiudi</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEACH MAP / PLANIMETRIA MODAL -->
+    <div id="beach-map-modal" class="modal" style="display:none">
+      <div class="modal-backdrop" id="beach-map-backdrop"></div>
+      <div class="modal-box beach-map-modal-box">
+        <button class="modal-close" id="beach-map-close">&times;</button>
+        <h2 style="margin-bottom:0.75rem">📷 Planimetria spiaggia</h2>
+        <div class="beach-map-modal-img-wrap">
+          <img id="beach-map-modal-img" src="" alt="Planimetria disposizione ombrelloni">
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: PRENOTA -->
+    <section id="view-prenota" class="view active">
+      <div class="hero">
+        <h2>Scegli il tuo posto in spiaggia</h2>
+        <p>Seleziona stagione, pacchetto e periodo. Verde = libero, giallo = in prenotazione, rosso = occupato.</p>
+      </div>
+
+      <div class="booking-layout">
+        <aside class="booking-controls">
+          <div class="card">
+            <h3>Stagione</h3>
+            <div class="form-group">
+              <select id="season-select" class="select-input"></select>
+            </div>
+            <p class="muted" id="season-range" style="font-size:0.8rem"></p>
+          </div>
+
+          <div class="card">
+            <h3>Tipo di prenotazione</h3>
+            <div class="package-grid">
+              <label class="package-option">
+                <input type="radio" name="package" value="giornaliera" checked>
+                <span class="package-card"><strong>Giornaliera</strong><small>1–30 giorni · sconti progressivi</small></span>
+              </label>
+              <label class="package-option">
+                <input type="radio" name="package" value="settimanale">
+                <span class="package-card"><strong>Settimanale</strong><small>7 giorni</small></span>
+              </label>
+              <label class="package-option">
+                <input type="radio" name="package" value="quindicinale">
+                <span class="package-card"><strong>Quindicinale</strong><small>15 giorni</small></span>
+              </label>
+              <label class="package-option">
+                <input type="radio" name="package" value="mensile">
+                <span class="package-card"><strong>Mensile</strong><small>30 giorni</small></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Periodo</h3>
+            <div class="form-group">
+              <label for="data-inizio">Data inizio</label>
+              <input type="date" id="data-inizio">
+            </div>
+            <div class="form-group" id="giorni-container">
+              <label for="num-giorni">Numero di giorni (max 30)</label>
+              <input type="number" id="num-giorni" min="1" max="30" value="1">
+            </div>
+            <div class="form-group" id="data-fine-container" style="display:none">
+              <label>Data fine (calcolata)</label>
+              <input type="text" id="data-fine" readonly>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Metodo di pagamento</h3>
+            <div class="payment-methods" id="payment-methods">
+              <label class="payment-option">
+                <input type="radio" name="payment" value="stripe" checked>
+                <span class="payment-card">💳 Carta (Stripe)</span>
+              </label>
+              <label class="payment-option" id="pay-opt-satispay">
+                <input type="radio" name="payment" value="satispay">
+                <span class="payment-card">📱 Satispay</span>
+              </label>
+              <label class="payment-option" id="pay-opt-cash">
+                <input type="radio" name="payment" value="cash">
+                <span class="payment-card">💵 Contanti all'arrivo</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card summary-card">
+            <h3>Riepilogo</h3>
+            <div id="riepilogo"><p class="muted">Seleziona un posto sulla mappa</p></div>
+            <button id="btn-prenota" class="btn btn-primary" disabled>Prenota e paga</button>
+            <p class="pay-hint muted" id="pay-hint" style="margin-top:0.5rem;font-size:0.8rem"></p>
+          </div>
+        </aside>
+
+        <div class="map-section">
+          <div class="map-header">
+            <h3>Mappa posti</h3>
+            <div class="legend">
+              <span class="legend-item"><i class="dot available"></i> Libero</span>
+              <span class="legend-item"><i class="dot selected"></i> Selezionato</span>
+              <span class="legend-item"><i class="dot pending"></i> In prenotazione</span>
+              <span class="legend-item"><i class="dot occupied"></i> Occupato</span>
+            </div>
+          </div>
+          <div class="beach-map" id="beach-map"></div>
+          <p class="map-hint">Passa il mouse su un posto occupato per vedere le date. Clicca su un posto verde per selezionarlo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: CALENDARIO -->
+    <section id="view-calendario" class="view">
+      <div class="hero">
+        <h2>Calendario disponibilità</h2>
+        <p>Occupazione per stagione. I colori indicano quanto è piena la spiaggia giorno per giorno.</p>
+      </div>
+      <div class="card">
+        <div class="cal-controls">
+          <div class="form-group" style="margin:0;min-width:220px">
+            <label for="cal-season">Stagione</label>
+            <select id="cal-season" class="select-input"></select>
+          </div>
+          <div class="cal-legend">
+            <span><i class="cal-swatch free"></i> Libera</span>
+            <span><i class="cal-swatch mid"></i> Media</span>
+            <span><i class="cal-swatch high"></i> Alta</span>
+            <span><i class="cal-swatch full"></i> Esaurita</span>
+          </div>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+      </div>
+    </section>
+
+    <!-- VIEW: MIE PRENOTAZIONI -->
+    <section id="view-mie-prenotazioni" class="view">
+      <div class="hero hero-row">
+        <div>
+          <h2>Le mie prenotazioni</h2>
+          <p>Visualizza e gestisci le tue prenotazioni. Cancellazione con penale se già pagate.</p>
+        </div>
+        <button class="btn btn-outline" id="btn-export-my-csv">⬇ Export CSV</button>
+      </div>
+      <div id="lista-prenotazioni" class="bookings-list"></div>
+    </section>
+
+    <!-- VIEW: ADMIN -->
+    <section id="view-admin" class="view">
+      <div class="hero">
+        <h2>Pannello Amministratore</h2>
+        <p>Stagioni, file, prezzi, banner, pagamenti e prenotazioni.</p>
+      </div>
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="impostazioni">Impostazioni</button>
+        <button class="admin-tab" data-tab="file">File &amp; Ombrelloni</button>
+        <button class="admin-tab" data-tab="stagioni">Stagioni</button>
+        <button class="admin-tab" data-tab="prezzi">Prezzi</button>
+        <button class="admin-tab" data-tab="disponibilita">Disponibilità</button>
+        <button class="admin-tab" data-tab="prenotazioni">Prenotazioni</button>
+      </div>
+
+      <!-- Impostazioni: nome spiaggia, banner, penale, pagamenti, QR Satispay -->
+      <div id="admin-impostazioni" class="admin-panel active">
+        <div class="card">
+          <h3>Nome spiaggia</h3>
+          <div class="form-group">
+            <label for="cfg-beach-name">Nome visualizzato</label>
+            <input type="text" id="cfg-beach-name" placeholder="Spiaggia Blu">
+          </div>
+        </div>
+        <div class="card">
+          <h3>Banner promozionale</h3>
+          <div class="form-group">
+            <label><input type="checkbox" id="cfg-banner-enabled"> Mostra banner in interfaccia utente</label>
+          </div>
+          <div class="form-group">
+            <label for="cfg-banner-text">Testo banner</label>
+            <input type="text" id="cfg-banner-text" placeholder="Promozione, avviso...">
+          </div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <div class="form-group">
+              <label for="cfg-banner-bg">Sfondo</label>
+              <input type="color" id="cfg-banner-bg" value="#0a7ea4">
+            </div>
+            <div class="form-group">
+              <label for="cfg-banner-color">Testo</label>
+              <input type="color" id="cfg-banner-color" value="#ffffff">
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Penale di cancellazione</h3>
+          <p class="muted">Applicata quando l'utente cancella una prenotazione già pagata (Stripe / Satispay).</p>
+          <div class="form-group">
+            <label for="cfg-penalty">Importo penale (€)</label>
+            <input type="number" id="cfg-penalty" min="0" step="0.5" value="15">
+          </div>
+        </div>
+        <div class="card">
+          <h3>Metodi di pagamento</h3>
+          <div class="form-group">
+            <label><input type="checkbox" id="cfg-pay-stripe" checked> Carta (Stripe)</label>
+          </div>
+          <div class="form-group">
+            <label><input type="checkbox" id="cfg-pay-satispay" checked> Satispay</label>
+          </div>
+          <div class="form-group">
+            <label><input type="checkbox" id="cfg-pay-cash" checked> Contanti all'arrivo</label>
+          </div>
+          <div class="form-group">
+            <label for="cfg-satispay-note">Nota Satispay (mostrata all'utente)</label>
+            <input type="text" id="cfg-satispay-note" placeholder="Scansiona il QR e indica l'ID prenotazione...">
+          </div>
+          <div class="form-group">
+            <label>QR Code Satispay</label>
+            <div id="satispay-qr-preview" style="margin:0.5rem 0"></div>
+            <input type="file" id="cfg-satispay-qr-file" accept="image/png,image/jpeg,image/webp,image/gif">
+            <button class="btn btn-outline btn-sm" id="btn-upload-qr" style="margin-top:0.5rem">Carica QR</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="btn-save-settings">Salva impostazioni</button>
+      </div>
+
+      <!-- File dinamiche -->
+      <div id="admin-file" class="admin-panel">
+        <div class="card">
+          <h3>Gestione file e ombrelloni</h3>
+          <p class="muted">Aggiungi file, rinomina, imposta il numero di posti e la numerazione degli ombrelloni (es. da 5 a 16).</p>
+          <div id="rows-admin-list" class="seasons-list"></div>
+          <hr style="margin:1.25rem 0;border:none;border-top:1px solid var(--border)">
+          <h4 style="margin-bottom:0.75rem">Nuova file</h4>
+          <div class="season-form" style="grid-template-columns: 1fr 1fr 1fr auto;">
+            <div class="form-group">
+              <label>Nome file</label>
+              <input type="text" id="new-row-name" placeholder="File VIP">
+            </div>
+            <div class="form-group">
+              <label>N° ombrelloni</label>
+              <input type="number" id="new-row-seats" min="1" max="50" value="12">
+            </div>
+            <div class="form-group">
+              <label>Numerazione da</label>
+              <input type="number" id="new-row-start" min="1" max="999" value="1" title="Numero del primo ombrellone">
+            </div>
+            <button class="btn btn-primary" id="btn-add-row" style="align-self:end">Aggiungi file</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="admin-stagioni" class="admin-panel">
+        <div class="card">
+          <h3>Gestione stagioni</h3>
+          <div id="seasons-admin-list" class="seasons-list"></div>
+          <hr style="margin:1.25rem 0;border:none;border-top:1px solid var(--border)">
+          <h4 style="margin-bottom:0.75rem">Nuova stagione</h4>
+          <div class="season-form">
+            <div class="form-group">
+              <label>Nome</label>
+              <input type="text" id="new-season-name" placeholder="Estate 2027">
+            </div>
+            <div class="form-group">
+              <label>Inizio</label>
+              <input type="date" id="new-season-start">
+            </div>
+            <div class="form-group">
+              <label>Fine</label>
+              <input type="date" id="new-season-end">
+            </div>
+            <button class="btn btn-primary" id="btn-add-season" style="align-self:end">Aggiungi</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="admin-prezzi" class="admin-panel">
+        <div class="card">
+          <h3>Prezzi per File e Pacchetto (€)</h3>
+          <p class="muted">Prezzo base giornaliero. Per la giornaliera: da 7 gg sconto settimanale, da 15 quindicinale, da 30 mensile.</p>
+          <div class="table-wrapper">
+            <table class="price-table" id="price-table">
+              <thead>
+                <tr>
+                  <th>File</th>
+                  <th>Giornaliera (€/giorno)</th>
+                  <th>Settimanale (sconto %)</th>
+                  <th>Quindicinale (sconto %)</th>
+                  <th>Mensile (sconto %)</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <button id="btn-salva-prezzi" class="btn btn-primary">Salva prezzi</button>
+        </div>
+      </div>
+
+      <div id="admin-disponibilita" class="admin-panel">
+        <div class="card">
+          <h3>Planimetria spiaggia</h3>
+          <p class="muted">Carica una foto o schema della disposizione reale degli ombrelloni. Clicca sull'immagine per ingrandirla.</p>
+          <div id="beach-map-preview-wrap" class="beach-map-preview-wrap">
+            <div id="beach-map-preview" class="beach-map-preview">
+              <span class="muted" id="beach-map-empty">Nessuna planimetria caricata</span>
+            </div>
+            <div class="beach-map-actions">
+              <input type="file" id="cfg-beach-map-file" accept="image/png,image/jpeg,image/webp,image/gif" style="display:none">
+              <button class="btn btn-outline btn-sm" id="btn-pick-beach-map">📷 Scegli file</button>
+              <button class="btn btn-outline btn-sm" id="btn-upload-beach-map" style="display:none">Carica planimetria</button>
+              <button class="btn btn-outline btn-sm" id="btn-view-beach-map" style="display:none">🔍 Vedi ingrandita</button>
+              <button class="btn btn-sm btn-danger" id="btn-remove-beach-map" style="display:none">Elimina</button>
+            </div>
+            <p id="beach-map-filename" class="muted" style="font-size:0.8rem;margin-top:0.35rem"></p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Gestione disponibilità posti</h3>
+          <p class="muted">Clicca su un posto per bloccarlo/sbloccarlo.</p>
+          <div class="beach-map admin-map" id="admin-map"></div>
+        </div>
+      </div>
+
+      <div id="admin-prenotazioni" class="admin-panel">
+        <div class="card">
+          <div class="hero-row" style="margin-bottom:1rem">
+            <h3 style="margin:0">Tutte le prenotazioni</h3>
+            <button class="btn btn-outline btn-sm" id="btn-export-all-csv">⬇ Export CSV</button>
+          </div>
+          <div id="admin-lista-prenotazioni" class="bookings-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 <span id="footer-beach-name">Spiaggia Blu</span> – Multi-stagione · Auth · Stripe · Satispay</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <!-- Tooltip for seat hover -->
+  <div id="seat-tooltip" class="seat-tooltip" style="display:none"></div>
+  <script src="/js/app.js"></script>
+</body>
+</html>

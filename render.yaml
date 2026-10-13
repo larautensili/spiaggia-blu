@@ -1,0 +1,33 @@
+# Blueprint Render.com – Spiaggia Blu
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Deploy: Dashboard → New → Blueprint → collega questo repository
+
+services:
+  - type: web
+    name: spiaggia-blu
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    buildCommand: "echo 'No build step'"
+    startCommand: "node server.js"
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+      - key: JWT_SECRET
+        generateValue: true
+      # Opzionale: Stripe, SMTP, admin
+      # - key: STRIPE_SECRET_KEY
+      #   sync: false
+      # - key: STRIPE_PUBLISHABLE_KEY
+      #   sync: false
+      # - key: SMTP_HOST
+      #   value: smtp.gmail.com
+      # - key: SMTP_USER
+      #   sync: false
+      # - key: SMTP_PASS
+      #   sync: false
+      # - key: ADMIN_NOTIFY_EMAIL
+      #   sync: false

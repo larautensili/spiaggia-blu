@@ -1,0 +1,14 @@
+{
+  "name": "spiaggia-blu",
+  "version": "2.0.0",
+  "description": "Spiaggia Blu – Prenotazioni multi-stagione",
+  "main": "server.js",
+  "bin": "entry.js",
+  "scripts": {
+    "start": "node server.js",
+    "pkg": "pkg entry.js --targets node18-win-x64 --output ../SpiaggiaBlu.exe"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

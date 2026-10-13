@@ -1,0 +1,909 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@spiaggiablu.it",
+      "password_hash": "ffeb701f23425d384af7099b63aced3e:9a54ad14dbca85c3a074698ae3fff3afb6b98a660f673f036c92442eb0739834dde9153eca6b3f9ff7c0087dd930bc64fc8ea598c33e9499f8b651655445bdb4",
+      "nome": "Amministratore",
+      "telefono": "",
+      "role": "admin",
+      "created_at": "2026-10-12T14:10:14.792Z"
+    },
+    {
+      "id": 2,
+      "email": "mario@email.com",
+      "password_hash": "fe6ee538eb0f91d4143e338d94e1478b:e922f7f5ddcaecf4aa66b9c8881ad99fa3324f723f02ce919aacb67dbe18cea5674767307a3364264ddda4337b2f0e7f1673c8fb177fdf1b0d2a912d87bb2b26",
+      "nome": "Mario Rossi",
+      "telefono": "+39 333 1234567",
+      "role": "user",
+      "created_at": "2026-10-12T14:10:14.839Z"
+    }
+  ],
+  "prices": {
+    "1": {
+      "giornaliera": 60,
+      "scontoSettimanale": 10,
+      "scontoQuindicinale": 15,
+      "scontoMensile": 20
+    },
+    "2": {
+      "giornaliera": 55,
+      "scontoSettimanale": 10,
+      "scontoQuindicinale": 15,
+      "scontoMensile": 20
+    },
+    "3": {
+      "giornaliera": 50,
+      "scontoSettimanale": 10,
+      "scontoQuindicinale": 15,
+      "scontoMensile": 20
+    },
+    "4": {
+      "giornaliera": 45,
+      "scontoSettimanale": 10,
+      "scontoQuindicinale": 15,
+      "scontoMensile": 20
+    },
+    "5": {
+      "giornaliera": 40,
+      "scontoSettimanale": 10,
+      "scontoQuindicinale": 15,
+      "scontoMensile": 20
+    },
+    "6": {
+      "giornaliera": 35,
+      "scontoSettimanale": 10,
+      "scontoQuindicinale": 15,
+      "scontoMensile": 20
+    }
+  },
+  "seats": {
+    "F1-P1": {
+      "id": "F1-P1",
+      "fila": 1,
+      "posto": 1,
+      "status": "available"
+    },
+    "F1-P2": {
+      "id": "F1-P2",
+      "fila": 1,
+      "posto": 2,
+      "status": "available"
+    },
+    "F1-P3": {
+      "id": "F1-P3",
+      "fila": 1,
+      "posto": 3,
+      "status": "available"
+    },
+    "F1-P4": {
+      "id": "F1-P4",
+      "fila": 1,
+      "posto": 4,
+      "status": "available"
+    },
+    "F1-P5": {
+      "id": "F1-P5",
+      "fila": 1,
+      "posto": 5,
+      "status": "available"
+    },
+    "F1-P6": {
+      "id": "F1-P6",
+      "fila": 1,
+      "posto": 6,
+      "status": "available"
+    },
+    "F1-P7": {
+      "id": "F1-P7",
+      "fila": 1,
+      "posto": 7,
+      "status": "available"
+    },
+    "F1-P8": {
+      "id": "F1-P8",
+      "fila": 1,
+      "posto": 8,
+      "status": "available"
+    },
+    "F1-P9": {
+      "id": "F1-P9",
+      "fila": 1,
+      "posto": 9,
+      "status": "available"
+    },
+    "F1-P10": {
+      "id": "F1-P10",
+      "fila": 1,
+      "posto": 10,
+      "status": "available"
+    },
+    "F1-P11": {
+      "id": "F1-P11",
+      "fila": 1,
+      "posto": 11,
+      "status": "available"
+    },
+    "F1-P12": {
+      "id": "F1-P12",
+      "fila": 1,
+      "posto": 12,
+      "status": "available"
+    },
+    "F2-P1": {
+      "id": "F2-P1",
+      "fila": 2,
+      "posto": 1,
+      "status": "available"
+    },
+    "F2-P2": {
+      "id": "F2-P2",
+      "fila": 2,
+      "posto": 2,
+      "status": "available"
+    },
+    "F2-P3": {
+      "id": "F2-P3",
+      "fila": 2,
+      "posto": 3,
+      "status": "available"
+    },
+    "F2-P4": {
+      "id": "F2-P4",
+      "fila": 2,
+      "posto": 4,
+      "status": "available"
+    },
+    "F2-P5": {
+      "id": "F2-P5",
+      "fila": 2,
+      "posto": 5,
+      "status": "available"
+    },
+    "F2-P6": {
+      "id": "F2-P6",
+      "fila": 2,
+      "posto": 6,
+      "status": "available"
+    },
+    "F2-P7": {
+      "id": "F2-P7",
+      "fila": 2,
+      "posto": 7,
+      "status": "available"
+    },
+    "F2-P8": {
+      "id": "F2-P8",
+      "fila": 2,
+      "posto": 8,
+      "status": "available"
+    },
+    "F2-P9": {
+      "id": "F2-P9",
+      "fila": 2,
+      "posto": 9,
+      "status": "available"
+    },
+    "F2-P10": {
+      "id": "F2-P10",
+      "fila": 2,
+      "posto": 10,
+      "status": "available"
+    },
+    "F2-P11": {
+      "id": "F2-P11",
+      "fila": 2,
+      "posto": 11,
+      "status": "available"
+    },
+    "F2-P12": {
+      "id": "F2-P12",
+      "fila": 2,
+      "posto": 12,
+      "status": "available"
+    },
+    "F2-P13": {
+      "id": "F2-P13",
+      "fila": 2,
+      "posto": 13,
+      "status": "available"
+    },
+    "F2-P14": {
+      "id": "F2-P14",
+      "fila": 2,
+      "posto": 14,
+      "status": "available"
+    },
+    "F2-P15": {
+      "id": "F2-P15",
+      "fila": 2,
+      "posto": 15,
+      "status": "available"
+    },
+    "F2-P16": {
+      "id": "F2-P16",
+      "fila": 2,
+      "posto": 16,
+      "status": "available"
+    },
+    "F2-P17": {
+      "id": "F2-P17",
+      "fila": 2,
+      "posto": 17,
+      "status": "available"
+    },
+    "F2-P18": {
+      "id": "F2-P18",
+      "fila": 2,
+      "posto": 18,
+      "status": "available"
+    },
+    "F2-P19": {
+      "id": "F2-P19",
+      "fila": 2,
+      "posto": 19,
+      "status": "available"
+    },
+    "F2-P20": {
+      "id": "F2-P20",
+      "fila": 2,
+      "posto": 20,
+      "status": "available"
+    },
+    "F2-P21": {
+      "id": "F2-P21",
+      "fila": 2,
+      "posto": 21,
+      "status": "available"
+    },
+    "F2-P22": {
+      "id": "F2-P22",
+      "fila": 2,
+      "posto": 22,
+      "status": "available"
+    },
+    "F2-P23": {
+      "id": "F2-P23",
+      "fila": 2,
+      "posto": 23,
+      "status": "available"
+    },
+    "F2-P24": {
+      "id": "F2-P24",
+      "fila": 2,
+      "posto": 24,
+      "status": "available"
+    },
+    "F2-P25": {
+      "id": "F2-P25",
+      "fila": 2,
+      "posto": 25,
+      "status": "available"
+    },
+    "F2-P26": {
+      "id": "F2-P26",
+      "fila": 2,
+      "posto": 26,
+      "status": "available"
+    },
+    "F2-P27": {
+      "id": "F2-P27",
+      "fila": 2,
+      "posto": 27,
+      "status": "available"
+    },
+    "F2-P28": {
+      "id": "F2-P28",
+      "fila": 2,
+      "posto": 28,
+      "status": "available"
+    },
+    "F2-P29": {
+      "id": "F2-P29",
+      "fila": 2,
+      "posto": 29,
+      "status": "available"
+    },
+    "F2-P30": {
+      "id": "F2-P30",
+      "fila": 2,
+      "posto": 30,
+      "status": "available"
+    },
+    "F2-P31": {
+      "id": "F2-P31",
+      "fila": 2,
+      "posto": 31,
+      "status": "available"
+    },
+    "F2-P32": {
+      "id": "F2-P32",
+      "fila": 2,
+      "posto": 32,
+      "status": "available"
+    },
+    "F2-P33": {
+      "id": "F2-P33",
+      "fila": 2,
+      "posto": 33,
+      "status": "available"
+    },
+    "F2-P34": {
+      "id": "F2-P34",
+      "fila": 2,
+      "posto": 34,
+      "status": "available"
+    },
+    "F2-P35": {
+      "id": "F2-P35",
+      "fila": 2,
+      "posto": 35,
+      "status": "available"
+    },
+    "F2-P36": {
+      "id": "F2-P36",
+      "fila": 2,
+      "posto": 36,
+      "status": "available"
+    },
+    "F2-P37": {
+      "id": "F2-P37",
+      "fila": 2,
+      "posto": 37,
+      "status": "available"
+    },
+    "F2-P38": {
+      "id": "F2-P38",
+      "fila": 2,
+      "posto": 38,
+      "status": "available"
+    },
+    "F2-P39": {
+      "id": "F2-P39",
+      "fila": 2,
+      "posto": 39,
+      "status": "available"
+    },
+    "F2-P40": {
+      "id": "F2-P40",
+      "fila": 2,
+      "posto": 40,
+      "status": "available"
+    },
+    "F3-P1": {
+      "id": "F3-P1",
+      "fila": 3,
+      "posto": 1,
+      "status": "available"
+    },
+    "F3-P2": {
+      "id": "F3-P2",
+      "fila": 3,
+      "posto": 2,
+      "status": "available"
+    },
+    "F3-P3": {
+      "id": "F3-P3",
+      "fila": 3,
+      "posto": 3,
+      "status": "available"
+    },
+    "F3-P4": {
+      "id": "F3-P4",
+      "fila": 3,
+      "posto": 4,
+      "status": "available"
+    },
+    "F3-P5": {
+      "id": "F3-P5",
+      "fila": 3,
+      "posto": 5,
+      "status": "available"
+    },
+    "F3-P6": {
+      "id": "F3-P6",
+      "fila": 3,
+      "posto": 6,
+      "status": "available"
+    },
+    "F3-P7": {
+      "id": "F3-P7",
+      "fila": 3,
+      "posto": 7,
+      "status": "available"
+    },
+    "F3-P8": {
+      "id": "F3-P8",
+      "fila": 3,
+      "posto": 8,
+      "status": "available"
+    },
+    "F3-P9": {
+      "id": "F3-P9",
+      "fila": 3,
+      "posto": 9,
+      "status": "available"
+    },
+    "F3-P10": {
+      "id": "F3-P10",
+      "fila": 3,
+      "posto": 10,
+      "status": "available"
+    },
+    "F3-P11": {
+      "id": "F3-P11",
+      "fila": 3,
+      "posto": 11,
+      "status": "available"
+    },
+    "F3-P12": {
+      "id": "F3-P12",
+      "fila": 3,
+      "posto": 12,
+      "status": "available"
+    },
+    "F4-P1": {
+      "id": "F4-P1",
+      "fila": 4,
+      "posto": 1,
+      "status": "available"
+    },
+    "F4-P2": {
+      "id": "F4-P2",
+      "fila": 4,
+      "posto": 2,
+      "status": "available"
+    },
+    "F4-P3": {
+      "id": "F4-P3",
+      "fila": 4,
+      "posto": 3,
+      "status": "available"
+    },
+    "F4-P4": {
+      "id": "F4-P4",
+      "fila": 4,
+      "posto": 4,
+      "status": "available"
+    },
+    "F4-P5": {
+      "id": "F4-P5",
+      "fila": 4,
+      "posto": 5,
+      "status": "available"
+    },
+    "F4-P6": {
+      "id": "F4-P6",
+      "fila": 4,
+      "posto": 6,
+      "status": "available"
+    },
+    "F4-P7": {
+      "id": "F4-P7",
+      "fila": 4,
+      "posto": 7,
+      "status": "available"
+    },
+    "F4-P8": {
+      "id": "F4-P8",
+      "fila": 4,
+      "posto": 8,
+      "status": "available"
+    },
+    "F4-P9": {
+      "id": "F4-P9",
+      "fila": 4,
+      "posto": 9,
+      "status": "available"
+    },
+    "F4-P10": {
+      "id": "F4-P10",
+      "fila": 4,
+      "posto": 10,
+      "status": "available"
+    },
+    "F4-P11": {
+      "id": "F4-P11",
+      "fila": 4,
+      "posto": 11,
+      "status": "available"
+    },
+    "F4-P12": {
+      "id": "F4-P12",
+      "fila": 4,
+      "posto": 12,
+      "status": "available"
+    },
+    "F4-P13": {
+      "id": "F4-P13",
+      "fila": 4,
+      "posto": 13,
+      "status": "available"
+    },
+    "F4-P14": {
+      "id": "F4-P14",
+      "fila": 4,
+      "posto": 14,
+      "status": "available"
+    },
+    "F4-P15": {
+      "id": "F4-P15",
+      "fila": 4,
+      "posto": 15,
+      "status": "available"
+    },
+    "F4-P16": {
+      "id": "F4-P16",
+      "fila": 4,
+      "posto": 16,
+      "status": "available"
+    },
+    "F4-P17": {
+      "id": "F4-P17",
+      "fila": 4,
+      "posto": 17,
+      "status": "available"
+    },
+    "F4-P18": {
+      "id": "F4-P18",
+      "fila": 4,
+      "posto": 18,
+      "status": "available"
+    },
+    "F4-P19": {
+      "id": "F4-P19",
+      "fila": 4,
+      "posto": 19,
+      "status": "available"
+    },
+    "F4-P20": {
+      "id": "F4-P20",
+      "fila": 4,
+      "posto": 20,
+      "status": "available"
+    },
+    "F5-P1": {
+      "id": "F5-P1",
+      "fila": 5,
+      "posto": 1,
+      "status": "available"
+    },
+    "F5-P2": {
+      "id": "F5-P2",
+      "fila": 5,
+      "posto": 2,
+      "status": "available"
+    },
+    "F5-P3": {
+      "id": "F5-P3",
+      "fila": 5,
+      "posto": 3,
+      "status": "available"
+    },
+    "F5-P4": {
+      "id": "F5-P4",
+      "fila": 5,
+      "posto": 4,
+      "status": "available"
+    },
+    "F5-P5": {
+      "id": "F5-P5",
+      "fila": 5,
+      "posto": 5,
+      "status": "available"
+    },
+    "F5-P6": {
+      "id": "F5-P6",
+      "fila": 5,
+      "posto": 6,
+      "status": "available"
+    },
+    "F5-P7": {
+      "id": "F5-P7",
+      "fila": 5,
+      "posto": 7,
+      "status": "available"
+    },
+    "F5-P8": {
+      "id": "F5-P8",
+      "fila": 5,
+      "posto": 8,
+      "status": "available"
+    },
+    "F5-P9": {
+      "id": "F5-P9",
+      "fila": 5,
+      "posto": 9,
+      "status": "available"
+    },
+    "F5-P10": {
+      "id": "F5-P10",
+      "fila": 5,
+      "posto": 10,
+      "status": "available"
+    },
+    "F5-P11": {
+      "id": "F5-P11",
+      "fila": 5,
+      "posto": 11,
+      "status": "available"
+    },
+    "F5-P12": {
+      "id": "F5-P12",
+      "fila": 5,
+      "posto": 12,
+      "status": "available"
+    },
+    "F5-P13": {
+      "id": "F5-P13",
+      "fila": 5,
+      "posto": 13,
+      "status": "available"
+    },
+    "F5-P14": {
+      "id": "F5-P14",
+      "fila": 5,
+      "posto": 14,
+      "status": "available"
+    },
+    "F5-P15": {
+      "id": "F5-P15",
+      "fila": 5,
+      "posto": 15,
+      "status": "available"
+    },
+    "F5-P16": {
+      "id": "F5-P16",
+      "fila": 5,
+      "posto": 16,
+      "status": "available"
+    },
+    "F5-P17": {
+      "id": "F5-P17",
+      "fila": 5,
+      "posto": 17,
+      "status": "available"
+    },
+    "F5-P18": {
+      "id": "F5-P18",
+      "fila": 5,
+      "posto": 18,
+      "status": "available"
+    },
+    "F5-P19": {
+      "id": "F5-P19",
+      "fila": 5,
+      "posto": 19,
+      "status": "available"
+    },
+    "F5-P20": {
+      "id": "F5-P20",
+      "fila": 5,
+      "posto": 20,
+      "status": "available"
+    },
+    "F6-P1": {
+      "id": "F6-P1",
+      "fila": 6,
+      "posto": 1,
+      "status": "available"
+    },
+    "F6-P2": {
+      "id": "F6-P2",
+      "fila": 6,
+      "posto": 2,
+      "status": "available"
+    },
+    "F6-P3": {
+      "id": "F6-P3",
+      "fila": 6,
+      "posto": 3,
+      "status": "available"
+    },
+    "F6-P4": {
+      "id": "F6-P4",
+      "fila": 6,
+      "posto": 4,
+      "status": "available"
+    },
+    "F6-P5": {
+      "id": "F6-P5",
+      "fila": 6,
+      "posto": 5,
+      "status": "available"
+    },
+    "F6-P6": {
+      "id": "F6-P6",
+      "fila": 6,
+      "posto": 6,
+      "status": "available"
+    },
+    "F6-P7": {
+      "id": "F6-P7",
+      "fila": 6,
+      "posto": 7,
+      "status": "available"
+    },
+    "F6-P8": {
+      "id": "F6-P8",
+      "fila": 6,
+      "posto": 8,
+      "status": "available"
+    },
+    "F6-P9": {
+      "id": "F6-P9",
+      "fila": 6,
+      "posto": 9,
+      "status": "available"
+    },
+    "F6-P10": {
+      "id": "F6-P10",
+      "fila": 6,
+      "posto": 10,
+      "status": "available"
+    },
+    "F6-P11": {
+      "id": "F6-P11",
+      "fila": 6,
+      "posto": 11,
+      "status": "available"
+    },
+    "F6-P12": {
+      "id": "F6-P12",
+      "fila": 6,
+      "posto": 12,
+      "status": "available"
+    },
+    "F6-P13": {
+      "id": "F6-P13",
+      "fila": 6,
+      "posto": 13,
+      "status": "available"
+    },
+    "F6-P14": {
+      "id": "F6-P14",
+      "fila": 6,
+      "posto": 14,
+      "status": "available"
+    },
+    "F6-P15": {
+      "id": "F6-P15",
+      "fila": 6,
+      "posto": 15,
+      "status": "available"
+    },
+    "F6-P16": {
+      "id": "F6-P16",
+      "fila": 6,
+      "posto": 16,
+      "status": "available"
+    },
+    "F6-P17": {
+      "id": "F6-P17",
+      "fila": 6,
+      "posto": 17,
+      "status": "available"
+    },
+    "F6-P18": {
+      "id": "F6-P18",
+      "fila": 6,
+      "posto": 18,
+      "status": "available"
+    },
+    "F6-P19": {
+      "id": "F6-P19",
+      "fila": 6,
+      "posto": 19,
+      "status": "available"
+    },
+    "F6-P20": {
+      "id": "F6-P20",
+      "fila": 6,
+      "posto": 20,
+      "status": "available"
+    }
+  },
+  "bookings": [
+    {
+      "id": "PRMV5C1EJGJE0",
+      "user_id": 2,
+      "seat_id": "F1-P7",
+      "fila": 1,
+      "package": "giornaliera",
+      "season_id": "S2027",
+      "data_inizio": "2027-05-16",
+      "data_fine": "2027-05-24",
+      "giorni": 9,
+      "prezzo": 472.5,
+      "status": "confirmed",
+      "stripe_session_id": "demo_1791814414310",
+      "stripe_payment_intent": null,
+      "created_at": "2026-10-12T14:13:34.300Z",
+      "payment_method": "stripe",
+      "satispay_verified": false,
+      "penalty_applied": 0
+    }
+  ],
+  "seasons": [
+    {
+      "id": "S2026",
+      "name": "Estate 2026",
+      "start": "2026-05-15",
+      "end": "2026-09-30",
+      "active": true
+    },
+    {
+      "id": "S2027",
+      "name": "Estate 2027",
+      "start": "2027-05-15",
+      "end": "2027-09-30",
+      "active": true
+    },
+    {
+      "id": "S2028",
+      "name": "Estate 2028",
+      "start": "2028-05-15",
+      "end": "2028-09-30",
+      "active": false
+    }
+  ],
+  "_seq": 3,
+  "rows": [
+    {
+      "id": 1,
+      "name": "Molo Vip",
+      "seats": 12,
+      "order": 1,
+      "startNumber": 1
+    },
+    {
+      "id": 2,
+      "name": "Molo",
+      "seats": 40,
+      "order": 2,
+      "startNumber": 1
+    },
+    {
+      "id": 3,
+      "name": "Sotto Molo",
+      "seats": 12,
+      "order": 3,
+      "startNumber": 1
+    },
+    {
+      "id": 4,
+      "name": "File 1",
+      "seats": 20,
+      "order": 4,
+      "startNumber": 1
+    },
+    {
+      "id": 5,
+      "name": "File 2",
+      "seats": 20,
+      "order": 5,
+      "startNumber": 1
+    },
+    {
+      "id": 6,
+      "name": "File 3",
+      "seats": 20,
+      "order": 6,
+      "startNumber": 1
+    }
+  ],
+  "settings": {
+    "beachName": "Bagni Beatrice",
+    "bannerEnabled": true,
+    "bannerText": "🏖️ Benvenuti! Prenota online e risparmia con i pacchetti settimanali e mensili.",
+    "bannerBg": "#ff8040",
+    "bannerColor": "#ffffff",
+    "cancellationPenalty": 20,
+    "paymentCash": true,
+    "paymentSatispay": true,
+    "paymentStripe": true,
+    "satispayQrUrl": null,
+    "satispayNote": "Scansiona il QR Satispay e indica l ID prenotazione nel messaggio.",
+    "beachMapUrl": null
+  }
+}
